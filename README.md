@@ -1,5 +1,8 @@
 ## Setup
 
+Note:
+This requires to have a compatible version of C++17 that has std::get<>(std::variant<>)) available for runtime.
+
 Download boost:
 https://www.boost.org/users/download/
 If you're on Windows, download the windows version, on for unix based
@@ -17,3 +20,4 @@ https://github.com/USCiLab/cereal/archive/v1.2.2.zip
 
 It's an open source header only serialization library leveraging C++11's basic reflexion (type_traits) for binary serialization
 of classes.
+
