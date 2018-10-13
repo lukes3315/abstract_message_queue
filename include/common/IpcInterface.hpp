@@ -8,6 +8,7 @@
 #include <string.h>
 #include <type_traits>
 #include <variant>
+#include <boost/variant.hpp>
 
 #define MQ_MSG_SIZE 1000
 
@@ -36,7 +37,7 @@ class IpcInterface{
     const std::string mq_name_;
     const size_t mq_size_;
     bool running_{true};
-    std::vector<std::variant<std::function<data_types(char*)>...> > variadic_decoder_;
+    std::vector<boost::variant<std::function<data_types(char*)>...> > variadic_decoder_;
     
     public:
     
@@ -49,7 +50,7 @@ class IpcInterface{
     }
     
     IpcInterface(const std::string & mq_name, const size_t & mq_size):internal_message_queue_(boost::interprocess::open_or_create, mq_name.c_str(), mq_size, MQ_MSG_SIZE), mq_name_(mq_name), mq_size_(mq_size){\
-        (variadic_decoder_.push_back(std::variant<std::function<data_types(char*)> ... >( std::function<data_types(char*)>([=](char* data) -> data_types {return decodeData<data_types>(data);}))), ...);
+        (variadic_decoder_.push_back(boost::variant<std::function<data_types(char*)> ... >( std::function<data_types(char*)>([=](char* data) -> data_types {return decodeData<data_types>(data);}))), ...);
     }
 
     void registerCallback(const std::function<void(const data_types & msg_data)> &... registered_callback)
@@ -63,7 +64,7 @@ class IpcInterface{
             internal_message_queue_.receive((void*)&incoming_data[0], MQ_MSG_SIZE, received_size, msg_priority);
             char idx=incoming_data[0];
             const std::string data(&incoming_data[1], received_size-1);
-            (register_callback(std::get<std::function<data_types(char*)> >(variadic_decoder_[idx])((char*)data.c_str())), ...);
+            (registered_callback(boost::get<std::function<data_types(char*)> >(variadic_decoder_[idx])((char*)data.c_str())), ...);
         }
     }
 
