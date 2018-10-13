@@ -38,7 +38,8 @@ class IpcInterface{
     const size_t mq_size_;
     bool running_{true};
     std::vector<boost::variant<std::function<data_types(char*)>...> > variadic_decoder_;
-    
+    std::tuple<std::function<void(data_types & msg_data)>...> callbacks_;
+
     public:
     
     template<typename data_type>
@@ -53,18 +54,24 @@ class IpcInterface{
         (variadic_decoder_.push_back(boost::variant<std::function<data_types(char*)> ... >( std::function<data_types(char*)>([=](char* data) -> data_types {return decodeData<data_types>(data);}))), ...);
     }
 
-    void registerCallback(const std::function<void(const data_types & msg_data)> &... registered_callback)
+    void registerCallback(const std::function<void(data_types & msg_data)> &... registered_callback)
     {
         std::size_t received_size{0};
         unsigned int msg_priority;
         char incoming_data[MQ_MSG_SIZE];
-
+        callbacks_=std::make_tuple(registered_callback...);
         while (running_){
             memset((void*)&incoming_data[0], 0, MQ_MSG_SIZE);
             internal_message_queue_.receive((void*)&incoming_data[0], MQ_MSG_SIZE, received_size, msg_priority);
             char idx=incoming_data[0];
             const std::string data(&incoming_data[1], received_size-1);
-            (registered_callback(boost::get<std::function<data_types(char*)> >(variadic_decoder_[idx])((char*)data.c_str())), ...);
+            try{
+                Helper::visitor_pattern<data_types...> visitor((char*)data.c_str(), callbacks_);
+                boost::apply_visitor(visitor, variadic_decoder_[idx]);
+            }
+            catch (...)
+            {
+            }
         }
     }
 

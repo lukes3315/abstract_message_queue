@@ -14,30 +14,24 @@ int main (int argc, char *argv[])
   IpcInterface<true, EXCHANGEABLE_TYPES> server_ipc("SERVER_MQ", 1000);
 
   server_ipc.registerCallback(
-        [](const common_types::DataType1 & data){
-          std::cout << "RECEIVING: " << __PRETTY_FUNCTION__ << std::endl;
-        }
-        , [](const common_types::DataType2 & data){
-          std::cout << "RECEIVING: " << __PRETTY_FUNCTION__ << std::endl;
-       }, [](const common_types::DataType3 & data){
-        std::cout << "RECEIVING: " << __PRETTY_FUNCTION__ << std::endl;
-       }, [](const common_types::DataType4 & data){
-        std::cout << "RECEIVING: " << __PRETTY_FUNCTION__ << std::endl;
-
-       }, [](const int & data){
-        std::cout << "RECEIVING: " << __PRETTY_FUNCTION__ << std::endl;
-
-       }, [](const size_t & data){
-        std::cout << "RECEIVING: " << __PRETTY_FUNCTION__ << std::endl;
-
-       }, [](const double & data){
-        std::cout << "RECEIVING: " << __PRETTY_FUNCTION__ << std::endl;
-
-       }, [](const float & data){
-        std::cout << "RECEIVING: " << __PRETTY_FUNCTION__ << std::endl;
-
-       }, [](const std::string & data){
-        std::cout << "RECEIVING: " << __PRETTY_FUNCTION__ << std::endl;
+        [](common_types::DataType1 & data){
+        std::cout << "RECEIVING: " << typeid(data).name() << " " << data.string_ << std::endl;
+        },[](common_types::DataType2 & data){
+        std::cout << "RECEIVING: " << typeid(data).name()  << " " << data.data << std::endl;
+        },[](common_types::DataType3 & data){
+        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        },[](common_types::DataType4 & data){
+        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        },[](int & data){
+        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        },[](size_t & data){
+        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        },[](double & data){
+        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        },[](float & data){
+        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        },[](std::string & data){
+        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
        }
   );
 

@@ -10,6 +10,11 @@ int main(void){
 
     client_mq.passToMessageQueue<1, std::string>("HELLO");
 
+    common_types::DataType1 datatype;
+    datatype.string_="NOPOOOO";
+
+    client_mq.passToMessageQueue(datatype);
+
     client_mq.passToMessageQueue(4);
     client_mq.passToMessageQueue(10);
     size_t data=100;
