@@ -10,31 +10,30 @@ using namespace boost::interprocess;
 
 int main (int argc, char *argv[])
 {
-  boost::interprocess::message_queue::remove("SERVER_MQ");
-  IpcInterface<true, EXCHANGEABLE_TYPES> server_ipc("SERVER_MQ", 1000);
+  IpcInterface<true, EXCHANGEABLE_TYPES>::removeReceiverQueue();
+  IpcInterface<true, EXCHANGEABLE_TYPES>::removeOutputQueue();
+  IpcInterface<true, EXCHANGEABLE_TYPES> server_ipc;
 
   server_ipc.registerCallback(
         [](common_types::DataType1 & data){
         std::cout << "RECEIVING: " << typeid(data).name() << " " << data.string_ << std::endl;
         },[](common_types::DataType2 & data){
-        std::cout << "RECEIVING: " << typeid(data).name()  << " " << data.data << std::endl;
+        std::cout << "RECEIVING: " << typeid(data).name() << " " << data.data << std::endl;
         },[](common_types::DataType3 & data){
         std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
         },[](common_types::DataType4 & data){
         std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
         },[](int & data){
-        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        std::cout << "RECEIVING: " << typeid(data).name() << " "  << data << std::endl;
         },[](size_t & data){
-        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        std::cout << "RECEIVING: " << typeid(data).name() << " "  << data << std::endl;
         },[](double & data){
-        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        std::cout << "RECEIVING: " << typeid(data).name() << " "  << data << std::endl;
         },[](float & data){
-        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        std::cout << "RECEIVING: " << typeid(data).name() << " "  << data << std::endl;
         },[](std::string & data){
-        std::cout << "RECEIVING: " << typeid(data).name() << std::endl;
+        std::cout << "RECEIVING: " << typeid(data).name() << " "  << data << std::endl;
        }
   );
-
-
   return 0;
 }
