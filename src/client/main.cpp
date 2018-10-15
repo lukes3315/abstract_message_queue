@@ -4,6 +4,9 @@
 #include <thread>
 
 int main(void){
+
+    // Client instantiation.
+    // Meta-false is for telling object remove MQ's on destructor.
     IpcInterface<false, EXCHANGEABLE_TYPES> client_mq;
 
     // Async testing
