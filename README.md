@@ -5,10 +5,12 @@ Note: If you run in any issues, please just file an issue on github.
 The purpose of the project is to leverage C++17's to guarantee type abstraction for server-client communication<br/>
 using message_queues (in this case boost's message queues (since they work on linux and windows)).<br/>
 The server runs in one termninal, the client in another. The server waits for incoming client connections.<br/>
+
 The server can:<br/>
 - receive any type of data (view code to see implementation) and process it in it's own memory space.<br/>
 - store any type of data.<br/>
 - retrieve stored data.<br/>
+<br/>
 The client can:<br/>
 - send data to server for processing.<br/>
 - send data to server for storage.<br/>
