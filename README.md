@@ -239,17 +239,16 @@ So now the entire decoding system is actually a very short function:<br/>
     }
 ```
 
-This can handle as many data types as we want to be passed on generically only using a `Macro` (the limitation is the tuple<br/> which can only handle 10 meta-types). I think the `Macro` could be done in another way as well.<br/>
+This can handle as many data types as we want to be passed on generically only using a `Macro` <br/>(the limitation is the tuple which can only handle 10 meta-types). I think the `Macro` could be done in another way as well.<br/>
 
 Now we have a generic pipeline for data communcation setup, we are going to move on the next steps, registering and <br/>
 retrieving custom data types.
 
-Here, I had to add two-way communication through a second `message_queue`. This `message_queue` enables the server to reply<br/>
-back to client when a retrieval request is made.<br/>
+Here, I had to add two-way communication through a second `message_queue`. This `message_queue` enables the server to<br/> reply back to client when a retrieval request is made.<br/>
 
 First off, we need to register data types, what I chose is to leverage the basic reflection system that C++ offers, <br/>
-essentially `<type_traits>`. This allows to extract the exact data type name during compilation. The way I chose to implement<br/> the registration was to use the reflected data type as a key with its respective unmarshalled data.<br/>
-To handle multiple data types, I store a `std::queue` of unmarshalled data.<br/>
+essentially `<type_traits>`. This allows to extract the exact data type name during compilation.<br/>
+The way I chose to implement the registration was to use the reflected data type as a key with its respective unmarshalled data.<br/>To handle multiple data types, I store a `std::queue` of unmarshalled data.<br/>
 
 What happens here:
 ```
