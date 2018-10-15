@@ -30,7 +30,7 @@ int main(void){
     client_mq.passToMessageQueue<std::string>("YES!");
 
     common_types::DataType1 datatype;
-    datatype.string_="Testing to pass more complex pre-registered data from client to server";
+    datatype.string_="Testing ";
 
     client_mq.passToMessageQueue(datatype);
 
@@ -55,22 +55,32 @@ int main(void){
 
     // Testing registering custom objects with custom values on server.
     data_type_test d_i;
+    // Assigning i to 50.
     d_i.i=50;
     client_mq.registerObject(d_i);
+
     data_type_test d_i2;
+    // Assigning i to 30.
     d_i2.i=30;
     client_mq.registerObject(d_i2);
+
     data_type_test d_i3;
+    // Assigning i to 22220.
     d_i3.i=22220;
     client_mq.registerObject(d_i3);
+
     data_type_test d_i4;
+    // Assigning i to 40.
     d_i4.i=40;
     client_mq.registerObject(d_i4);
+
     data_type_test d_i5;
+    // Assigning i to 50.
     d_i5.i=50;
     client_mq.registerObject(d_i5);
 
     // Testing retrieving custom data from backend and calling method on registered object.
+    // This will print out all the different values assigned to i.
     while (client_mq.retrieveObject(d_i5)){
         d_i5.print();
     }
