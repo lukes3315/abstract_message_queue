@@ -1,19 +1,18 @@
 ## Setup
 
-Note:
-This requires to have a compatible version of C++17 that has std::get<>(std::variant<>)) available for runtime.
-
 Download boost:
 https://www.boost.org/users/download/
 If you're on Windows, download the windows version, on for unix based
 download the unix version.
 
+On Unix based systems:
 For boost run:
-mv ~/Downloads/boost_1_68_0.tar.gz .
-tar -xzf boost_1_68_0.tar.gz
-cd boost_1_68_0
-./bootstrap.sh
-./b2
+tar -xzf boost_1_68_0.tar.gz # Decompressed boost.
+cd boost_1_68_0 # Go into boost directory.
+./bootstrap.sh # Run bootstrapping
+./b2 toolset=clang threading=multi runtime-link=static  link=static cxxflags="-stdlib=libc++ -DBOOST_DISABLE_ASSERTS" linkflags="-stdlib=libc++" address-model=64
+
+This will generate the appropriate dependencies for boost.
 
 Then for serialization purposes download Cereal:
 https://github.com/USCiLab/cereal/archive/v1.2.2.zip

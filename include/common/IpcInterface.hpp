@@ -2,13 +2,14 @@
 #define IPC_INTERFACE
 
 #include <iostream>
-#include <boost/interprocess/ipc/message_queue.hpp>
-#include <cereal/archives/portable_binary.hpp>
-#include <common/Helper.hpp>
-#include <string.h>
-#include <type_traits>
-#include <boost/variant.hpp>
 #include <queue>
+#include <type_traits>
+#include <string.h>
+#include <unordered_map>
+
+#include <boost/interprocess/ipc/message_queue.hpp>
+#include <boost/variant.hpp>
+#include <common/Helper.hpp>
 
 #define MQ_MSG_SIZE 1000
 

@@ -1,8 +1,6 @@
 // A simple program that computes the square root of a number
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <cereal/archives/binary.hpp>
 #include <boost/interprocess/ipc/message_queue.hpp>
 #include <common/IpcInterface.hpp>
 

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cereal/archives/binary.hpp>
 #include <common/IpcInterface.hpp>
 #include <thread>
 
