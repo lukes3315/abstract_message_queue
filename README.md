@@ -115,7 +115,7 @@ from the `pipe`.<br/>
 
 First off, the server and the client NEED to know what will be the data types exchanged to have the<br/>
 capacity to respond adequately to and from. From this I decided to start-off with a `Macro` to pass<br/>
-in to the `IpcInterface`, as follows:
+in to the `IpcInterface`, as follows:<br/>
 Server main.cpp:
 ```
   IpcInterface<true, EXCHANGEABLE_TYPES> server_ipc;
