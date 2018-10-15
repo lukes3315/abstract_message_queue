@@ -22,8 +22,20 @@ The client can:
 
 First you are required to [install cmake](https://cmake.org/install/).
 
+For Windows:<br/>
+First, you'll need to [install Visual Studio](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15#).
+Then [download boost](https://www.boost.org/users/download/)<br/>and put it in the cloned directory.
+Go in the boost directory and run:
+```
+bootstrap.bat
+```
+When this process completes, run:
+```
+.\b2
+```
 
-Then, download boost:<br/>
+For Mac:<br/>
+Download boost:<br/>
 https://www.boost.org/users/download/<br/>
 If you're on Windows, download the windows version, on for unix based
 download the unix version.
@@ -55,10 +67,15 @@ First off, run `cmake`:
 ```
 cmake .
 ```
-Then, run `make`:
+
+If you are on Windows just open the .vxproj file with Visual Studio and run the program.
+
+Starting here it's for Mac only, Windows users can directly jump to the output at the end.
+Then, on Mac run `make`:
 ```
 make
 ```
+
 From there, two executables: `server` and `client` were generated.
 
 You'll need to first run the server in one terminal:
