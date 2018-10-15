@@ -9,7 +9,6 @@ The server can:<br/>
 - receive any type of data (view code to see implementation) and process it in it's own memory space.<br/>
 - store any type of data.<br/>
 - retrieve stored data.<br/>
-<br/>
 The client can:<br/>
 - send data to server for processing.<br/>
 - send data to server for storage.<br/>
