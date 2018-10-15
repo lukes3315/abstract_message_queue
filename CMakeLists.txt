@@ -10,6 +10,7 @@ set (CMAKE_CXX_STANDARD 17)
 set(INCLUDE_DIRS boost_1_68_0)
 set(SERVER_SOURCES src/server/main.cpp)
 set(CLIENT_SOURCES src/client/main.cpp)
+link_directories(boost_1_68_0/stage/lib)
 
 include_directories("${PROJECT_BINARY_DIR}" ${INCLUDE_DIRS} include)
 
