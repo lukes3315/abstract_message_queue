@@ -12,6 +12,7 @@ set(SERVER_SOURCES src/server/main.cpp)
 set(CLIENT_SOURCES src/client/main.cpp)
 
 include_directories("${PROJECT_BINARY_DIR}" ${INCLUDE_DIRS} include)
+link_directories(boost_1_68_0/stage/lib)
 
 add_executable(server ${SERVER_SOURCES})
 target_link_libraries(server)
